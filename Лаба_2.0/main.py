@@ -8,7 +8,7 @@ def add_task(name, priority):
     for i in range(len(tasks)):
         if name == tasks[i][1]:
             return "Имя уже занято"
-    tasks.append([str(priority), str(name)])
+    tasks.append([int(priority), str(name)])
     return 'Задача выполнена успешно'
 
 def remove_task(name):
