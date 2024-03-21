@@ -54,5 +54,5 @@ for i in range(questsnum):
         print("Неверно")
         score[2] += level
 
-print(f'Количество ответов: {score[0]} | твой счёт: {score[1]}/{score[2]}')
+print(f'Количество правильных ответов: {score[0]} | твой счёт: {score[1]}/{score[2]}')
 
