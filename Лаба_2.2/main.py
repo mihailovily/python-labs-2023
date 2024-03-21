@@ -20,12 +20,8 @@ class Account(object):
         return self.balance
     
 
-def create_account():
-    bank_acc = Account(0)
-    print(bank_acc.balance)
 bank_acc = Account(0)
 
-create_account()
 print('Вам создан банковский счет. Текущий баланс = 0')
 while True:
     print('Что будете делать?\n\n1 - пополнить баланс\n2 - вывести деньги со счета\n3 - проверить остаток средств\n0 - завершение работы')
