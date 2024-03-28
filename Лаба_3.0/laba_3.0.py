@@ -7,6 +7,14 @@ def is_number(input_str):
     except ValueError:
         return False
 
+def filter_below_zero(list_with_zeros):
+    list_bigger_zeros = []
+    for i in list_with_zeros:
+        if i > 0:
+            list_bigger_zeros.append(i)
+    return list_bigger_zeros
+
+
 csv_file_path = 'example.csv'
 list_of_floats = []
 
