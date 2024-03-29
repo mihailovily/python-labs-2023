@@ -10,6 +10,13 @@ def board_print(board):
             print(element, end=' ')
         print()
 
+def is_number(input_str):
+    try:
+        int(input_str)
+        return True
+    except ValueError:
+        return False
+
 def win(board, player):
     for row in board:
         if row.count(player) == 3: return True
@@ -25,14 +32,18 @@ player = '0'
 while True:
     board_print(board)
     print(f"Ход игрока {player}")
-    row = int(input("Введите строку: ")) - 1
-    column = int(input("Введите столбец: ")) - 1
-    if row
-    if board[row][column] != '-': continue
-    board[row][column] = player
-    if row > 2 or row < 0 or column > 2 or column < 0:
+    row = (input("Введите строку: "))
+    column = (input("Введите столбец: "))
+    if is_number(row) and is_number(column):
+        row = int(row) - 1
+        column = int(column) - 1
+        if row > 2 or row < 0 or column > 2 or column < 0:
+            print('неверный формат координат')
+            continue      
+    else:
         print('неверный формат координат')
         continue
+    board[row][column] = player
     if win(board,player) == True:
         print(f"Победил игрок {player}")
         break
