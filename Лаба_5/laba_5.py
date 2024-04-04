@@ -1,5 +1,6 @@
 from random import randint
 import time
+import random
 
 # названия функций сортировки начинаем с sort
 
@@ -19,34 +20,102 @@ def generate_list(numbers):  # инициализируем тестовый м�
     return testmassiv
 
 
-def sort_bubble():
+def sort_bubble(massiv_to_sort):
+    sorted_massiv = massiv_to_sort.copy()
+    N = len(sorted_massiv)
+    for i in range(N-1):
+        for j in range(N-1-i):
+            if sorted_massiv[j] > sorted_massiv[j+1]:
+                sorted_massiv[j], sorted_massiv[j+1] = sorted_massiv[j+1], sorted_massiv[j]
+    return sorted_massiv.copy()
+
+def sort_selection(massiv_to_sort):
+    sorted_massiv = massiv_to_sort.copy()
+    n = len(sorted_massiv)
+    for i in range(n - 1):
+        min = i
+        for j in range(i + 1, n):
+            if(sorted_massiv[j] < sorted_massiv[min]):
+                min = j
+        sorted_massiv[i], sorted_massiv[min] = sorted_massiv[min], sorted_massiv[i]
+    return sorted_massiv.copy()
+
+def sort_insertion(massiv_to_sort):
+    sorted_massiv = massiv_to_sort.copy()
+    for i in range(1, len(sorted_massiv)):
+        for j in range(i - 1, -1, -1):
+            if(sorted_massiv[j] > sorted_massiv[j + 1]):
+                sorted_massiv[j], sorted_massiv[j + 1] = sorted_massiv[j + 1], sorted_massiv[j]
+    return sorted_massiv.copy()
+
+def sort_merge(massiv_to_sort):
+    size = len(massiv_to_sort)
+    if size > 1:
+        middle = size // 2
+        left_arr = massiv_to_sort[:middle]
+        right_arr = massiv_to_sort[middle:]
+ 
+        sort_merge(left_arr)
+        sort_merge(right_arr)
+ 
+        p = 0
+        q = 0
+        r = 0
+ 
+        left_size = len(left_arr)
+        right_size = len(right_arr)
+        while p < left_size and q < right_size:
+            if left_arr[p] < right_arr[q]:
+              massiv_to_sort[r] = left_arr[p]
+              p += 1
+            else:
+                massiv_to_sort[r] = right_arr[q]
+                q += 1
+             
+            r += 1
+ 
+        
+        while p < left_size:
+            massiv_to_sort[r] = left_arr[p]
+            p += 1
+            r += 1
+ 
+        while q < right_size:
+            massiv_to_sort[r]=right_arr[q]
+            q += 1
+            r += 1
+    return massiv_to_sort.copy()
+
+def sort_quick(massiv_to_sort):
+   if len(massiv_to_sort) <= 1:
+       return massiv_to_sort
+   else:
+       q = random.choice(massiv_to_sort)
+       s_nums = []
+       m_nums = []
+       e_nums = []
+       for n in massiv_to_sort:
+           if n < q:
+               s_nums.append(n)
+           elif n > q:
+               m_nums.append(n)
+           else:
+               e_nums.append(n)
+       return sort_quick(s_nums) + e_nums + sort_quick(m_nums)
+
+def sort_timsort(massiv_to_sort):
     pass
 
-def sort_selection():
+def sort_heap(massiv_to_sort):
     pass
 
-def sort_insertion():
+def sort_counting(massiv_to_sort):
     pass
 
-def sort_merge():
+def sort_bucket(massiv_to_sort):
     pass
 
-def sort_quick():
-    pass
-
-def sort_timsort():
-    pass
-
-def sort_heap():
-    pass
-
-def sort_counting():
-    pass
-
-def sort_bucket():
-    pass
-
-def sort_radix():
+def sort_radix(massiv_to_sort):
     pass
 
 
@@ -64,51 +133,63 @@ while True:
         time_start = time.perf_counter()
         test_sorted = sort_bubble(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 2:  # Сортировка выбором (Selection Sort)
         time_start = time.perf_counter()
         test_sorted = sort_selection(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 3:  # Сортировка вставками (Insertion Sort)
         time_start = time.perf_counter()
         test_sorted = sort_insertion(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 4:  # Сортировка слиянием (Merge Sort)
         time_start = time.perf_counter()
-        test_sorted = sort_merge(test_massiv)
+        test_massiv_2 = test_massiv.copy()
+        sort_merge(test_massiv_2)
         time_finish = time.perf_counter()
+        print(test_massiv_2)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 5:  # Быстрая сортировка (Quick Sort)
+        test_massiv_2 = test_massiv.copy()
         time_start = time.perf_counter()
-        test_sorted = sort_quick(test_massiv)
+        test_sorted = sort_quick(test_massiv_2)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 6:  # Тим-сортировка (Timsort)
         time_start = time.perf_counter()
         test_sorted = sort_timsort(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 7:  # Сортировка кучей (Heap Sort):
         time_start = time.perf_counter()
         test_sorted = sort_heap(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 8:  # Сортировка подсчетом (Counting Sort)
         time_start = time.perf_counter()
         test_sorted = sort_counting(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 9:  # Блочная сортировка (Bucket Sort)
         time_start = time.perf_counter()
         test_sorted = sort_bucket(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     elif selection == 10:  # Сортировка радиксом (Radix Sort)
         time_start = time.perf_counter()
         test_sorted = sort_radix(test_massiv)
         time_finish = time.perf_counter()
+        print(test_sorted)
         print("Время работы: " + str(time_finish - time_start))
     else:
         print("Неверный ввод")
