@@ -42,6 +42,27 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
+       <widget class="QPushButton" name="pushButton_off">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(121, 121, 121);</string>
+        </property>
+        <property name="text">
+         <string>OFF</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_AC">
         <property name="minimumSize">
          <size>
@@ -80,27 +101,6 @@
         </property>
         <property name="text">
          <string>%</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_del">
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(121, 121, 121);</string>
-        </property>
-        <property name="text">
-         <string>DEL</string>
         </property>
        </widget>
       </item>
