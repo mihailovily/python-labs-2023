@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import QtWidgets
 import calc
-import os
+import sys
 
 
 class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
@@ -41,7 +41,10 @@ class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
             if self.currentAction == '%':
                 self.currentResult %= float(self.currentEntered)
             elif self.currentAction == '/':
-                self.currentResult /= float(self.currentEntered)
+                if float(self.currentEntered) * 1 != 0:
+                    self.currentResult /= float(self.currentEntered)
+                else:
+                    error_dialog.showMessage('Не надо делить на 0')
             elif self.currentAction == '*':
                 self.currentResult *= float(self.currentEntered)
             elif self.currentAction == '-':
@@ -65,7 +68,6 @@ class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
                     self.currentEntered = str(self.currentResult)
                 self.currentAction = 'after='
                 
-        print(self.currentEntered, self.currentResult)
     
     def action_del(self):
         self.currentResult = self.currentEntered[:-1]
@@ -83,6 +85,7 @@ class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
         if self.currentResult == int(self.currentResult):
             pass
 
+
 def is_number(input_str):
     try:
         int(input_str)
@@ -91,12 +94,10 @@ def is_number(input_str):
         return False
 
 
-def main():
-    app = QtWidgets.QApplication(sys.argv)
-    window = ExampleApp()
-    window.show()
-    app.exec_()
+app = QtWidgets.QApplication(sys.argv)
+window = ExampleApp()
+window.show()
+error_dialog = QtWidgets.QErrorMessage()
+app.exec_()
 
 
-if __name__ == "__main__":
-    main()
