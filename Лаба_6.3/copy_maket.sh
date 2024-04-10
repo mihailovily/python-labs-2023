@@ -1,0 +1,1 @@
+pyuic5 calc.ui -o calc.py
