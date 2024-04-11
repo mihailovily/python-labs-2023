@@ -1,47 +1,36 @@
-#!/usr/bin/env python
-import PySimpleGUI as sg
 
 
-layout = [
-    [sg.Button("Save"), sg.Button("Close")],
-    [sg.Text("This is my sample text", size=(20, 1), key="-text-")],
-    [
-        sg.CB("Bold", key="-bold-", change_submits=True),
-        sg.CB("Italics", key="-italics-", change_submits=True),
-        sg.CB("Underline", key="-underline-", change_submits=True),
-    ],
-    [
-        sg.Slider(
-            (6, 50),
-            default_value=12,
-            size=(14, 20),
-            orientation="h",
-            key="-slider-",
-            change_submits=True,
-        ),
-        sg.Text("Font size"),
-    ],
-    [sg.Text("Font string = "), sg.Text("", size=(25, 1), key="-fontstring-")],
-    [sg.Button("Exit")],
-]
-
-window = sg.Window("Font string builder", layout)
-
-text_elem = window["-text-"]
-while True:  # Event Loop
-    event, values = window.read()
-    if event in (sg.WIN_CLOSED, "Exit"):
-        break
-    font_string = "Helvitica "
-    font_string += str(int(values["-slider-"]))
-    if values["-bold-"]:
-        font_string += " bold"
-    if values["-italics-"]:
-        font_string += " italic"
-    if values["-underline-"]:
-        font_string += " underline"
-    text_elem.update(font=font_string)
-    window["-fontstring-"].update('"' + font_string + '"')
-
-
-window.close()
+def count_sort(input_array):
+    # Finding the maximum element of input_array.
+    M = max(input_array)
+ 
+    # Initializing count_array with 0
+    count_array = [0] * (M + 1)
+ 
+    # Mapping each element of input_array as an index of count_array
+    for num in input_array:
+        count_array[num] += 1
+ 
+    # Calculating prefix sum at every index of count_array
+    for i in range(1, M + 1):
+        count_array[i] += count_array[i - 1]
+ 
+    # Creating output_array from count_array
+    output_array = [0] * len(input_array)
+ 
+    for i in range(len(input_array) - 1, -1, -1):
+        output_array[count_array[input_array[i]] - 1] = input_array[i]
+        count_array[input_array[i]] -= 1
+ 
+    return output_array
+ 
+# Driver code
+if __name__ == "__main__":
+    # Input array
+    input_array = [4, 3, 12, 1, 5, 5, 3, 9]
+ 
+    # Output array
+    output_array = count_sort(input_array)
+ 
+    for num in output_array:
+        print(num, end=" ")
