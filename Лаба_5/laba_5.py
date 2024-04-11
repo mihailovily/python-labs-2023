@@ -142,20 +142,19 @@ def sort_heap(massiv_to_sort):
         heapify(massiv_to_sort, i, 0)
 
 
-def sort_counting(massiv_to_sort):
-    size = len(massiv_to_sort)
-    output = [0] * size
-    count = [0] * 10
-    for i in range(0, size):
-        count[massiv_to_sort[i]] += 1
-    for i in range(1, 10):
-        count[i] += count[i - 1]
-    i = size - 1
-    while i >= 0:
-        output[count[massiv_to_sort[i]] - 1] = massiv_to_sort[i]
-        count[massiv_to_sort[i]] -= 1
-        i -= 1
-    return output
+def sort_counting(input_array):
+    M = max(input_array)
+    count_array = [0] * (M + 1)
+    for num in input_array:
+        count_array[num] += 1
+    for i in range(1, M + 1):
+        count_array[i] += count_array[i - 1]
+    output_array = [0] * len(input_array)
+    for i in range(len(input_array) - 1, -1, -1):
+        output_array[count_array[input_array[i]] - 1] = input_array[i]
+        count_array[input_array[i]] -= 1
+
+    return output_array
 
 
 def sort_bucket(massiv_to_sort):
