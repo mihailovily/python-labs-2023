@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtWidgets
 import calc
 import sys
+from math import log
 
 
 class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
@@ -21,7 +22,7 @@ class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
         self.pushButton_7.clicked.connect(self.action)
         self.pushButton_8.clicked.connect(self.action)
         self.pushButton_9.clicked.connect(self.action)
-        self.pushButton_00.clicked.connect(self.action)
+        self.pushButton_LOG.clicked.connect(self.action)
         self.pushButton_AC.clicked.connect(self.clear)
         self.pushButton_perc.clicked.connect(self.action)
         self.pushButton_off.clicked.connect(self.off)
@@ -32,6 +33,7 @@ class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
         self.pushButton_final.clicked.connect(self.action)
         self.pushButton_point.clicked.connect(self.action)
 
+    
     def action(self):
         text = self.sender().text()
         self.label.setText(self.label.text() + text)
@@ -55,6 +57,8 @@ class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
                 pass
             elif self.currentAction == 'after=':
                 self.currentResult = float(self.currentEntered)
+            elif self.currentAction == 'LOG':
+                self.currentResult = log(int(self.currentResult), int(self.currentEntered))
             else:
                 print('error', text, self.currentAction)
             self.currentAction = text
@@ -84,7 +88,6 @@ class ExampleApp(QtWidgets.QMainWindow, calc.Ui_MainWindow):
     def result(self):
         if self.currentResult == int(self.currentResult):
             pass
-
 
 def is_number(input_str):
     try:

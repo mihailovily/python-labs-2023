@@ -2,6 +2,34 @@ from pathlib import Path
 import PySimpleGUI as sg
 
 
+def popup_saver():
+    sg.theme("GreenMono")
+
+
+    layout = [
+        [
+            sg.Button("CSV"),
+            sg.Button("HTML"),
+            sg.Button("TXT")
+        ]
+    ]
+
+    window = sg.Window("Saving", layout)
+
+    while True:
+        event, values = window.read()
+        if event == sg.WINDOW_CLOSED:
+            break
+        elif event == "CSV":
+            return '.csv'
+        elif event == "HTML":
+            return '.html'
+        elif event == "TXT":
+            return '.txt'
+
+    window.close()
+
+
 def popup_editor(filename, text):
     layout = [
         [sg.Button("Save"), sg.Button("Close")],
@@ -21,7 +49,7 @@ def popup_editor(filename, text):
                 change_submits=True,
             ),
             sg.Text("Font size"),
-        ]
+        ],
     ]
     window = sg.Window("Text Editor", layout)
     text_elem = window["-text-"]
@@ -30,12 +58,13 @@ def popup_editor(filename, text):
         if event in (sg.WIN_CLOSED, "Exit"):
             break
         elif event == "Save":
-            with open('test.txt', "w", encoding="utf-8") as f:
-                test = values['-text-']
+            filename = "test" + popup_saver()
+            with open(filename, "w", encoding="utf-8") as f:
+                test = values["-text-"]
                 print(test)
                 f.write(test)
                 f.close()
-        elif event == 'Close':
+        elif event == "Close":
             break
         font_string = "Helvitica "
         font_string += str(int(values["-slider-"]))

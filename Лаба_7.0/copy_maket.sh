@@ -1,0 +1,1 @@
+pyuic5 bank.ui -o bank.py
