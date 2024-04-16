@@ -93,12 +93,18 @@ class ExampleApp(QtWidgets.QMainWindow, bank.Ui_MainWindow):
             message = self.savings.withdraw(self.spinWith.value())
         elif curIndex == 2:
             message = self.current.withdraw(self.spinWith.value())
+        else:
+            message = 'error'
         self.label.setText(message)
 
     def deposit(self):
         curIndex = self.selectAcc.currentIndex()
         if curIndex == 0:
             message = self.bank.deposit(self.spinDep.value())
+        if curIndex == 1:
+            message = self.savings.deposit(self.spinDep.value())
+        if curIndex == 2:
+            message = self.current.deposit(self.spinDep.value())
         self.label.setText(message)
 
 
