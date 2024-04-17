@@ -68,7 +68,6 @@ class ExampleApp(QtWidgets.QMainWindow, bank.Ui_MainWindow):
         self.__bank_acc_selected()
 
     def activated(self, index):
-        print("Activated index:", index)
         if index == 0:
             self.__bank_acc_selected()
         elif index == 1:

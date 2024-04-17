@@ -1,0 +1,1 @@
+pyuic5 gibdd.ui -o gibdd.py
